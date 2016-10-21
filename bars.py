@@ -10,22 +10,10 @@ def load_data(filepath):
 
 
 def get_biggest_bar(data):
-    max = 0
-    bar = ""
-    for i in data:
-        if i['Cells']['SeatsCount'] > max:
-            max = i['Cells']['SeatsCount']
-            bar = i['Cells']['Name']
-    return bar
+    return max(data, key=lambda item:item['Cells']['SeatsCount'])['Cells']['Name']
 
 def get_smallest_bar(data):
-    min = 1000
-    bar = ""
-    for i in data:
-        if i['Cells']['SeatsCount'] < min:
-            min = i['Cells']['SeatsCount']
-            bar = i['Cells']['Name']
-    return bar
+    return min(data, key=lambda item:item['Cells']['SeatsCount'])['Cells']['Name']
 
 
 def get_closest_bar(data, longitude, latitude):
