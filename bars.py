@@ -1,9 +1,12 @@
+# *-* coding: utf-8 -*-
 import json
+import os
+import sys
 
 def load_data(filepath):
-    with open(filepath, 'r', encoding='utf-8') as data_file:
-        data_file = json.load(data_file, encoding='utf-8')
-    return data_file
+    if os.path.exists(filepath):
+        with open(filepath, 'r') as data_file:
+            return json.load(data_file)
 
 
 def get_biggest_bar(data):
@@ -39,15 +42,15 @@ def get_closest_bar(data, longitude, latitude):
 
 
 if __name__ == '__main__':
-    data_file = load_data('D:/Бары.json')
-    #pprint(data_file)
-    print(get_biggest_bar(data_file))
-    print(get_smallest_bar(data_file))
-    longitude = int(input())
-    latitude = int(input())
-    print(get_closest_bar(data_file, longitude, latitude))
-    #pprint(data_file[0])
-    #print(data_file[0]['Cells']['SeatsCount'])
-    #print(data_file[0].get('Number'))
+    if len(sys.argv) == 1:
+        data_file = load_data(os.path.join(".", "Бары.json"))
+    else:
+        data_file = load_data(sys.argv[1])
+    print("Самый большой бар:", get_biggest_bar(data_file))
+    print("Самый маленький бар:", get_smallest_bar(data_file))
+    longitude = int(input("Введите Вашу долготу: "))
+    latitude = int(input("Введите Вашу широту: "))
+    print("Ближайший к вам бар:", get_closest_bar(data_file, longitude, latitude))
+
 
 
