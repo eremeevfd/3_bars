@@ -9,9 +9,9 @@ The minimum requirement is Python3+ installed on your device.
 Go to [link](http://data.mos.ru/opendata/export/1796/json/2/1) to download Бары.json file with a list of Moscow bars.
 Run script and set path to your Бары.json file as command line argument or directly input in in script.
 ### EXAMPLE RESULTS
->Enter path to your Bars.json file:./Бары.json
->The biggest bar:  Ночной клуб «Орфей»
->The smallest bar:  БАР. СОКИ
->Enter your current longitude:37.621601433458
->Enter your current latitude:55.760077312517
+>Enter path to your Bars.json file:./Бары.json  
+>The biggest bar:  Ночной клуб «Орфей»  
+>The smallest bar:  БАР. СОКИ  
+>Enter your current longitude:37.621601433458  
+>Enter your current latitude:55.760077312517  
 >The closest bar to you: Суши-бар Эноки ( при гостинице Арарат Парк Хаятт
