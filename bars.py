@@ -17,28 +17,32 @@ def get_smallest_bar(data):
 
 
 def get_closest_bar(data, longitude, latitude):
-    long = 1000
-    lat = 1000
-    bar = ""
-    for i in data:
-        if i['Cells']['geoData']['coordinates'][0] - longitude < long and \
-            i['Cells']['geoData']['coordinates'][1] - latitude < lat:
-                bar = i['Cells']['Name']
-    return bar
+    return min(data, key=lambda item:((item['Cells']['geoData']['coordinates'][0]-longitude)**2\
+                               +(item['Cells']['geoData']['coordinates'][1]-latitude)**2)**0.5)['Cells']['Name']
 
 
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
-        data_file = load_data(os.path.join(".", "Бары.json"))
+        bars_json_data_file = load_data(input("Enter path to your Bars.json file: "))
     else:
-        data_file = load_data(sys.argv[1])
-    print("Самый большой бар:", get_biggest_bar(data_file))
-    print("Самый маленький бар:", get_smallest_bar(data_file))
-    longitude = int(input("Введите Вашу долготу: "))
-    latitude = int(input("Введите Вашу широту: "))
-    print("Ближайший к вам бар:", get_closest_bar(data_file, longitude, latitude))
+        bars_json_data_file = load_data(sys.argv[1])
+    print("The biggest bar:", get_biggest_bar(bars_json_data_file))
+    print("The smallest bar:", get_smallest_bar(bars_json_data_file))
+    try:
+        longitude = float(input("Enter your current longitude: "))
+        latitude = float(input("Enter your current latitude: "))
+    except ValueError:
+        longitude = None
+        latitude = None
+
+    if longitude is None:
+        print("Wtf, dude?")
+    elif latitude is None:
+        print("Wtf, dude?")
+    else:
+        print("The closest bar to you:", get_closest_bar(bars_json_data_file, longitude, latitude))
 
 
 
